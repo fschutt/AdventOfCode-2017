@@ -1,37 +1,17 @@
 const INPUT: &str = include_str!("input.txt");
 
-fn part1() {
-    let input_numbers: Vec<Vec<u32>> = INPUT
-        .lines()
-        .collect::<Vec<&str>>()
-        .iter().map(|line|
-            line
-            .split_whitespace()
-            .map(|c| c.parse::<u32>().unwrap())
-            .collect()
-        ).collect();
-
-    let out: u32 = input_numbers.iter().map(|line| {
+fn part1(input_numbers: &Vec<Vec<u32>>) {
+    let solution: u32 = input_numbers.iter().map(|line| {
         let min = line.iter().min().unwrap();
         let max = line.iter().max().unwrap();
         max - min
     }).sum();
 
-    println!("part 1: {}", out);
+    println!("part 1: {}", solution);
 }
 
-fn part2() {
-    let input_numbers: Vec<Vec<u32>> = INPUT
-        .lines()
-        .collect::<Vec<&str>>()
-        .iter().map(|line|
-            line
-            .split_whitespace()
-            .map(|c| c.parse::<u32>().unwrap())
-            .collect()
-        ).collect();
-
-    let out: u32 = input_numbers.iter().map(|line| {
+fn part2(input_numbers: &Vec<Vec<u32>>) {
+    let solution: u32 = input_numbers.iter().map(|line| {
         // O(n log(n)) - there are better ways
         let mut max_diff = 0;
         for (idx, val) in line.iter().enumerate() {
@@ -51,10 +31,20 @@ fn part2() {
         max_diff
     }).sum();
 
-    println!("{:#?}", out);
+    println!("part 2: {}", solution);
 }
 
 fn main() {
-    part1();
-    part2();
+    let input_numbers: Vec<Vec<u32>> = INPUT
+        .lines()
+        .collect::<Vec<&str>>()
+        .iter().map(|line|
+            line
+            .split_whitespace()
+            .map(|c| c.parse::<u32>().unwrap())
+            .collect()
+        ).collect();
+
+    part1(&input_numbers);
+    part2(&input_numbers);
 }
